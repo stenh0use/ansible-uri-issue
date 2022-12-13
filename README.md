@@ -1,6 +1,8 @@
 # Ansible regression ansible.builtin.uri
 Example role to demonstrate regression in ansible.builtin.uri module where the json dictionary is not returned when the status code is not 200 and the python interpreter is python2.
 
+full details of issue here: https://github.com/ansible/ansible/issues/79592
+
 [Documentation](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/uri_module.html#parameter-return_content) states the following about `return_content` key.
 
         Independently of this option, if the reported Content-type is

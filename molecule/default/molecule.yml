@@ -23,7 +23,7 @@ platforms:
   - name: server
     image: server:latest
     pre_build_image: false
-    command: "--app /tmp/server.py run --host=0.0.0.0"
+    command: ""
     networks:
       - name: test
 provisioner:

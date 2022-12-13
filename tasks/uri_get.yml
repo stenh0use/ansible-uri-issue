@@ -3,7 +3,7 @@
   ansible.builtin.uri:
     url: "http://server:5000/{{ status_code }}"
     method: GET
-    return_content: false #true
+    return_content: true
     status_code:
       - "{{ status_code }}"
     body_format: json

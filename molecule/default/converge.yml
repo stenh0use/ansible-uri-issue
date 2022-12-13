@@ -1,0 +1,6 @@
+---
+- name: Converge
+  hosts: instances
+  gather_facts: true
+  roles:
+    - uri

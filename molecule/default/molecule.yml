@@ -1,0 +1,32 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: centos7
+    image: geerlingguy/docker-centos7-ansible:latest
+    pre_build_image: true
+    command: ""
+    networks:
+      - name: test
+    groups:
+      - instances
+  - name: centos8
+    image: geerlingguy/docker-centos8-ansible:latest
+    pre_build_image: true
+    command: ""
+    networks:
+      - name: test
+    groups:
+      - instances
+  - name: server
+    image: server:latest
+    pre_build_image: false
+    command: "--app /tmp/server.py run --host=0.0.0.0"
+    networks:
+      - name: test
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

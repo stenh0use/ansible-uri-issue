@@ -1,0 +1,25 @@
+---
+- name: get json response with code {{ status_code }}
+  ansible.builtin.uri:
+    url: "http://server:5000/{{ status_code }}"
+    method: GET
+    return_content: false #true
+    status_code:
+      - "{{ status_code }}"
+    body_format: json
+  register: response
+
+- ansible.builtin.debug:
+    var: response
+
+- name: assert json dict exists
+  ansible.builtin.assert:
+    that:
+      - response.json is defined
+  ignore_errors: true
+
+- ansible.builtin.set_fact:
+    json_dict_missing: true
+    failed_status_codes: "{{ (failed_status_codes | default([])) + [response.status] }}"
+  when:
+    - not response.json is defined

@@ -1,0 +1,20 @@
+---
+- ansible.builtin.include_tasks: uri_get.yml
+  vars:
+    status_code: "{{ item }}"
+  loop:
+    - 200
+    - 429
+    - 501
+    - 503
+
+- ansible.builtin.debug:
+    var: ansible_facts.python_version
+
+- ansible.builtin.assert:
+    that:
+      - not (json_dict_missing | default(false) | bool)
+    success_msg: all test cases passed
+    fail_msg: |
+      one or more uri responses had a missing json_dict.
+      failed status codes: "{{ failed_status_codes | default([]) }}"
